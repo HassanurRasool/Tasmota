@@ -31,17 +31,20 @@ jobs:
         run: |
           # Fetch all remote changes
           git fetch --all
+
+          # Fetch specific branch from origin to update local remote tracking
+          git fetch origin sync-upstream_1
           
           # Check if sync-upstream_1 exists locally
           if git show-ref --verify --quiet refs/heads/sync-upstream_1; then
             echo "Branch sync-upstream_1 exists locally. Checking out..."
             git checkout sync-upstream_1
           else
-            if git ls-remote --heads origin sync-upstream_1; then
+            if git branch -r | grep 'origin/sync-upstream_1'; then
               echo "Branch sync-upstream_1 exists on remote origin. Checking out..."
-              # Fetch the specific branch from the remote
-              git fetch origin sync-upstream_1
-              git checkout sync-upstream_1
+              # Create a local branch tracking the remote branch
+              git checkout -b sync-upstream_1 origin/sync-upstream_1
+              # git checkout sync-upstream_1
             else
               echo "Branch sync-upstream_1 does not exist. Creating new branch..."
               # Fetch from origin to ensure we have the latest information
