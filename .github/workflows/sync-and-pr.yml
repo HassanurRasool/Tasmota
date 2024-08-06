@@ -31,9 +31,6 @@ jobs:
         run: |
           # Fetch all remote changes
           git fetch --all
-
-          # Fetch specific branch from origin to update local remote tracking
-          # git fetch origin sync-upstream_1
           
           # Check if sync-upstream_1 exists locally
           if git show-ref --verify --quiet refs/heads/sync-upstream_1; then
@@ -85,12 +82,17 @@ jobs:
             echo "Branch temp-fork-merge exists locally. Checking out..."
             git checkout temp-fork-merge
           else
-            if git ls-remote --heads origin temp-fork-merge; then
+            if git ls-remote --heads origin temp-fork-merge | grep temp-fork-merge; then
               echo "Branch temp-fork-merge exists on remote origin. Checking out..."
-              git checkout -b temp-fork-merge origin/development-upstream
+              # Create a local branch tracking the remote branch
+              git checkout -b temp-fork-merge origin/temp-fork-merge
             else
               echo "Branch temp-fork-merge does not exist. Creating new branch..."
-              git checkout -b temp-fork-merge origin/development-upstream
+              # Fetch from origin to ensure we have the latest information
+              git fetch origin
+
+              # Create the temp-fork-merge branch based on origin/development-base
+              git checkout -b temp-fork-merge origin/development-base
               git push origin temp-fork-merge
             fi
           fi
