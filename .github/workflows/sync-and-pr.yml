@@ -55,11 +55,14 @@ jobs:
       - name: Sync with upstream
         uses: tgymnich/fork-sync@v2
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          upstream_repository: 'arendst/Tasmota'
-          upstream_branch: 'development' # The branch of the upstream repository to sync with (e.g., 'main', 'master')
-          #head: upstream/development
-          #base: sync-upstream_1
+          token: ${{ secrets.GITHUB_TOKEN }} # GitHub token for authentication
+          owner: 'arendst' # Owner of the upstream repository
+          repo: 'Tasmota' # Name of the upstream repository
+          head: 'development' # The branch in the upstream repository to sync from
+          base: 'sync-upstream_1' # The branch in your fork to sync to
+          merge_method: 'merge' # Method to use for merging changes (e.g., 'merge', 'rebase', 'squash')
+          auto_approve: true # Automatically approve the pull request if one is created
+          auto_merge: true # Automatically merge the pull request if one is created
           
       - name: Push changes to fork
         run: git push origin sync-upstream_1
