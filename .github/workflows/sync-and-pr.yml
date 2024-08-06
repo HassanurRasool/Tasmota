@@ -33,7 +33,7 @@ jobs:
           git fetch --all
 
           # Fetch specific branch from origin to update local remote tracking
-          git fetch origin sync-upstream_1
+          # git fetch origin sync-upstream_1
           
           # Check if sync-upstream_1 exists locally
           if git show-ref --verify --quiet refs/heads/sync-upstream_1; then
