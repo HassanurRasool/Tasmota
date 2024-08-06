@@ -1,14 +1,10 @@
 name: Sync Fork and Create PR
 
 on:
-  #push:
-  #  branches:
-  #    - development
+  schedule:
+     - cron: '0 0 * * *' # Runs daily at midnight UTC
   workflow_dispatch: # Allow manual triggering      
-# Uncomment to schedule the workflow
-# on:
-#   schedule:
-#     - cron: '0 0 * * *' # Runs daily at midnight UTC
+
 
 jobs:
   sync-and-pr:
@@ -60,7 +56,7 @@ jobs:
         uses: tgymnich/fork-sync@v2
         with:
           upstream_repository: 'arendst/Tasmota'
-          head: development
+          head: upstream/development
           base: sync-upstream_1
           token: ${{ secrets.GITHUB_TOKEN }}
 
