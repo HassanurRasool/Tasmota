@@ -55,11 +55,12 @@ jobs:
       - name: Sync with upstream
         uses: tgymnich/fork-sync@v2
         with:
-          upstream_repository: 'arendst/Tasmota'
-          head: upstream/development
-          base: sync-upstream_1
           token: ${{ secrets.GITHUB_TOKEN }}
-
+          upstream_repository: 'arendst/Tasmota'
+          upstream_branch: 'development' # The branch of the upstream repository to sync with (e.g., 'main', 'master')
+          #head: upstream/development
+          #base: sync-upstream_1
+          
       - name: Push changes to fork
         run: git push origin sync-upstream_1
 
