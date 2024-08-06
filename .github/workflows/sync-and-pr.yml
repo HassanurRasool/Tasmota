@@ -1,10 +1,10 @@
 name: Sync Fork and Create PR
 
 on:
-  push:
-    branches:
-      - development
-      
+  #push:
+  #  branches:
+  #    - development
+  workflow_dispatch: # Allow manual triggering      
 # Uncomment to schedule the workflow
 # on:
 #   schedule:
