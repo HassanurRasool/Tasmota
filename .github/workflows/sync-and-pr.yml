@@ -39,7 +39,7 @@ jobs:
           else
             if git ls-remote --heads origin sync-upstream_1; then
               echo "Branch sync-upstream_1 exists on remote origin. Checking out..."
-              git checkout -b sync-upstream_1 origin/development-upstream
+              git checkout sync-upstream_1
             else
               echo "Branch sync-upstream_1 does not exist. Creating new branch..."
               git checkout -b sync-upstream_1 origin/development-upstream
