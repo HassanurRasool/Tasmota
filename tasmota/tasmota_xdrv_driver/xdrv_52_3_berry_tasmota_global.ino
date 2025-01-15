@@ -33,11 +33,12 @@ extern "C" {
 
   extern const be_ctypes_structure_t be_tasmota_global_struct = {
     sizeof(TasmotaGlobal),  /* size in bytes */
-    9,  /* number of elements */
+    10,  /* number of elements */
     nullptr,
-    (const be_ctypes_structure_item_t[9]) {
+    (const be_ctypes_structure_item_t[10]) {
       // Warning: fields below need to be in alphabetical order
       { "devices_present", offsetof(TasmotaGlobal_t, devices_present), 0, 0, ctypes_u8, 0 },
+      { "energy_driver", offsetof(TasmotaGlobal_t, energy_driver), 0, 0, ctypes_u8, 0 },
       { "fast_loop_enabled", offsetof(TasmotaGlobal_t, berry_fast_loop_enabled), 0, 0, ctypes_u8, 0 },
       { "masterlog_level", offsetof(TasmotaGlobal_t, masterlog_level), 0, 0, ctypes_u8, 0 },
       { "maxlog_level", offsetof(TasmotaGlobal_t, maxlog_level), 0, 0, ctypes_u8, 0 },
@@ -50,11 +51,15 @@ extern "C" {
 
   extern const be_ctypes_structure_t be_tasmota_settings_struct = {
     sizeof(TSettings),  /* size in bytes */
-    6,  /* number of elements */
+    10,  /* number of elements */
     nullptr,
-    (const be_ctypes_structure_item_t[6]) {
+    (const be_ctypes_structure_item_t[10]) {
       // Warning: fields below need to be in alphabetical order
       { "bootcount", offsetof(TSettings, bootcount), 0, 0, ctypes_u16, 0 },
+      { "light_pixels", 0x496, 0, 15, ctypes_bf, 0 },
+      { "light_pixels_alternate", 0xEC5, 7, 1, ctypes_bf, 0 },
+      { "light_pixels_height_1", 0xEC4, 0, 15, ctypes_bf, 0 },
+      { "light_pixels_reverse", 0x497, 7, 1, ctypes_bf, 0 },
       { "mqttlog_level", offsetof(TSettings, mqttlog_level), 0, 0, ctypes_u8, 0 },
       { "seriallog_level", offsetof(TSettings, seriallog_level), 0, 0, ctypes_u8, 0 },
       { "sleep", offsetof(TSettings, sleep), 0, 0, ctypes_u8, 0 },
